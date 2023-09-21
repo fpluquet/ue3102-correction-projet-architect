@@ -62,7 +62,7 @@ html, body {
 }
 
 .project-header {
-  height: 100px;
+  min-height: 100px;
   border-bottom: 1px solid #CCC;
 }
 
@@ -78,4 +78,8 @@ html, body {
 
 .project-room {
   flex: 1;
+}
+
+.hidden {
+  display: none;
 }

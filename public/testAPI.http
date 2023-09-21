@@ -1,0 +1,19 @@
+GET http://localhost:3000/projects
+
+### Send GET request to get project info
+POST http://localhost:3000/project
+Content-Type: application/json
+
+{
+  "name": "Un nouveau projet",
+  "description": "Excellent ce projet"
+}
+
+### Send PUT request with json body
+PUT http://localhost:3000/project/2
+Content-Type: application/json
+
+{
+  "name": "Projet 2 from http request",
+  "description": "Projet description 2 from http request"
+}

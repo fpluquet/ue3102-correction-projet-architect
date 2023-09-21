@@ -7,8 +7,11 @@ let projects = [
   {
     id: 1,
     name: "Project 1 from server",
+    description: "Le projet en cours"
   }
 ]
+
+let nextProjectId = 2
 
 // api
 
@@ -23,17 +26,24 @@ app.get('/projects', (req, res) => {
 })
 
 app.post('/project', (req, res) => {
-  setTimeout(() => {
-    console.log(res.body)
-    const projectData = req.body
+  const projectData = req.body
 
-    const newProject = {
-      id: projects.length + 1,
-      name: projectData.name,
-    }
-    projects.push(newProject)
-      res.send(newProject)
-  }, 2000)
+  const newProject = {
+    id: nextProjectId++,
+    name: projectData.name,
+    description: projectData.description ?? "Description par défaut"
+  }
+  projects.push(newProject)
+  res.send(newProject)
+})
+
+app.put('/project/:id', (req, res) => {
+  const projectData = req.body
+  const project = projects.find(project => project.id === Number(req.params.id))
+  if(!project) return res.status(404).send("Not found")
+  project.name = projectData.name
+  project.description = projectData.description
+  res.send(project)
 })
 
 app.delete('/project/:id', (req, res) => {
